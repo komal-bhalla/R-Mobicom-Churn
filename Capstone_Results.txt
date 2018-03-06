@@ -1,0 +1,150 @@
+     
+   1. The top five factors (along with their beta coefficients) affecting churn are as follows:
+
+   unq_7        retdays_1        unq_4        unq_3        unq_2   
+   0.82911543   0.70322397   0.32332234   0.23578984   0.23168393 
+
+  The 1st factor explains with a unit increase in level 7 of variable uniqsubs, there is 0.82911543 unit increase in churn.
+
+  The 2nd factor explains with a unit increase in variable retdays, there is 0.70322397 unit increase in churn.
+
+  Same explanation applies to next 3 variables. Variable unq_4, unq_3, unq_2 represents the no. of unique subscribers in the household being 4,3,2 respectively.
+  Thus family bundles should be rolled out for families with 7,4,3,2 unique subscribers, 
+  giving maximum priority to 7 unique subscriber household and the rest unique subscribers will follow in the order given.
+  Special offers should be given to customers who make retention calls, at the earliest as per their grieviances.
+  
+   2. a) The following variables explain cost and billing 
+                   Beta Coefficient
+  totmrc_Mean     -0.00647469  
+  rev_Range        0.00163482  
+
+  ovrrev_Mean      0.00711364  
+  
+  totrev           0.00025613  
+ Variable totmrc_Mean i.e. base plan charge representing cost to customer.
+ Variable rev_Range i.e. 'Range of Revenue(charge amount)' representing billing amount
+ Variable ovrrev_Mean =DATOVR_MEAN + VCEOVR_MEAN i.e. 'Mean Overage Revenue' (It is the sum of data and voice overage revenues) representing
+ the overage revenue earned from customers after billing the same to them.
+ Variable totrev i.e. 'total revenue' representing the total revenue earned from customers. 
+ Variable totmrc_Mean has beta coefficient value of -0.00647469 meaning a unit increase in this variable is causing decrease in churn
+ by -0.00647469/unit.
+ Variable rev_Range has beta coefficient value of 0.00163482 meaning a unit increase in this variable is causing increase in churn
+ by 0.00163482/unit.
+ Variable ovrrev_Mean has beta coefficient value of 0.00711364 meaning a unit increase in this variable is causing increase in churn
+ by0.00711364/unit.
+ Variable totrev has beta coefficient value of 0.00025613 meaning a unit increase in this variable is causing increase in churn
+ by 0.00025613/unit.
+ Having said that if above beta values are noticed, a unit increase in them is having almost 0% impact on churn. So it seems cost and billing
+ is not very important factors here influencing churn behaviour at Mobicom.
+
+ The variables and their beta coefficients below explain "network and service quality"
+
+ mou_Range           0.00019035
+ change_mou         -0.00074548
+ drop_blk_Mean       0.00355630
+ drop_vce_Range      0.02124469
+ mou_opkv_Range     -0.00106567
+ iwylis_vce_Mean    -0.02103584
+ avgqty              0.00092422
+ retdays_1           0.69441947
+ complete_Mean      -0.00181741
+
+ 
+ Variable mou_Range i.e. with a unit increase in 'Range of no. of minutes of use',
+ there is an increase in churn by 0.00019035 units.
+ Variable change_mou i.e. with a unit increase in 'Percentage change in monthly minutes of use vs previous three month average,
+ there is a decrease in churn by 0.00074548 units.
+ Variable drop_blk_Mean i.e. with a unit increase in 'Mean no. of dropped or blocked calls', there is an increase in churn by
+ 0.00355630 units.
+ Variable drop_vce_Range i.e. with a unit increase in 'Range of number of dropped (failed) voice calls', there is an increase
+  in churn by 0.02124469 units.
+ Variable mou_opkv_Range i.e. with a unit increase in 'Range of unrounded minutes of use of off peak voice calls', there is a decrease
+ in churn by 0.00106567 units.
+ Variable iwylis_vce_Mean i.e. with a unit increase in 'Mean no. of inbound wireless to wireless voice calls', there is a decrease in churn by
+  0.02103584 units.
+ Variable avgqty i.e. with a unit increase in 'Average monthly number of calls over the life of the customer', there is an increase in churn 
+ by 0.00092422 units.
+ Variable retdays_1 representing values captured in the variable retdays i.e. with a unit increase in 'No. of days since the last retention call',
+ there is an increase in churn by 0.69441947 units.
+ This variable is probably explaining the service quality of the company.
+ Variable complete_Mean i.e. with a unit increase in 'Mean no. of completed data and voice calls', there is a decrease in churn by 
+  0.00181741 units.
+  Of the above variables, variable retdays_1 is expressing a very important factor influencing churn behaviour. This is with the increase in the number of days 
+ since a customer makes a retention call, the customer's chances of churning is very high. This could probably be because their grieviances are not being catered to properly.
+ These customers should be paid more attention to and special offers should be made to them depending upon their grieviances.
+ 
+ 2.(b)
+ comp_dat_Mean - Mean no. of completed data calls
+ plcd_dat_Mean - Mean no. of attempted data calls placed
+ opk_dat_Mean - Mean no. of off-peak data calls
+ blck_dat_Mean -Mean no. of blocked/failed data calls
+ datovr_Mean - Mean revenue of data overage
+ datovr_Range - Range of revenue of data overage
+ drop_dat_Mean - Mean no. of dropped/failed data calls
+  The above variables express data usage connectivity.
+  quantile(tele$comp_dat_Mean,prob=c(0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.82,0.84,0.85,0.90,1))
+  The data quality report for all the above variables show that only 10% to 15% customers are actually 
+  making data calls or using the Internet. This could be a matter of concern since the global market survey report 
+  shows "Subscribers who have switched operators in recent months reported 2 key information sources in their
+  decision: the Internet and recommendation of family and friends...
+  In this case it seems customers are not really using the internet. So it would be good to work towards attaining 
+  more customers to use data and also towards proving quality network connectivity and service to provide 
+  maximum customer satisfactions and reduce Churn.
+  Since there is not enough usable data for the above variables they are not showing any influence on the churn behaviour at Mobicom.
+ 
+ 3. Variable ovrrev_Mean has beta coefficient of 0.00796232.
+  var ovrrev_Mean = DATOVR_MEAN + VCEOVR_MEAN i.e. 'Mean overage revenue'
+  It is the sum of data and voice overage revenues representing the overage revenue earned from customers
+  after billing the same to them.
+  The beta coefficient is not showing a strong impact of overage billing as an influencer of churn behaviour.
+  Though this might be a matter of concern for few individual customers and they could be catered to on case to case basis.
+  But overall rate plan migration as a proactive retention strategy might not help much at Mobicom.
+
+ 4. library(gains)
+ gains(test$churn,predict(mod5,type="response",newdata=test),groups=10)
+ The Gains Chart shows that the top 20% of the probabilities contain 28.4% customers that are highly
+ likely to churn.
+ Selecting customers with high churn rate:
+ test$prob<-predict(mod5,type="response",newdata=test)
+ quantile(test$prob,prob=c(0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1))
+
+ Top 20% of probabilities lie between 0.2908599 and 0.6983775
+ Applying cutoff value to predict customer who will churn:-
+  pred4<-predict(mod5,type="response",newdata=test)
+  pred4<-ifelse(pred4>=0.2908599,1,0)
+  table(pred4,test$churn)
+  Targeted<-test[test$prob>0.2908599 & test$prob<=0.6983775 & test$churn=="1","Customer_ID"] 
+  Targeted<-as.data.frame(Targeted) 
+  nrow(Targeted)
+  write.csv(Targeted,"Target_Customers.csv",row.names=F) 
+ 
+ Thus using the model can be used to predict customers with high probability of churn and
+ extract the target list using their "Customer ID".
+ 
+
+ 5. 
+ pred5<-predict(mod5,type="response",newdata=test)
+ test$prob<-predict(mod5,type="response",newdata=test)
+ quantile(test$prob,prob=c(0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1))
+ pred6<-ifelse(pred5<0.20,"Low_Score",ifelse(pred5>=0.20 & pred5<0.30,"Medium_Score","High_Score"))
+ table(pred6,test$churn)
+ str(test$totrev)
+ quantile(test$totrev,prob=c(0.10,0.20,0.30,0.40,0.50,0.60,0.70,0.80,0.90,1))
+ Revenue_Levels<-ifelse(test$totrev<670.660,"Low_Revenue",ifelse(test$totrev>=670.660 & test$totrev<1034.281,"Medium_Revenue","High Revenue"))
+ table(Revenue_Levels)
+ table(pred6,Revenue_Levels)
+
+ Thus this table can be used to select the levels of customers are to be targeted
+  and the Target list can be extracted as follows:
+ 
+ test$prob_levels<-ifelse(pred5<0.20,"Low_Score",ifelse(pred5>=0.20 & pred5<0.30,"Medium_Score","High_Score"))
+ test$Revenue_Levels<-ifelse(test$totrev<670.660,"Low_Revenue",ifelse(test$totrev>=670.660 & test$totrev<1034.281,"Medium_Revenue","High_Revenue"))
+
+ Targeted1<-test[test$prob_levels=="High_Score" & test$Revenue_Levels=="High_Revenue","Customer_ID"] 
+ Targeted1<-as.data.frame(Targeted1) 
+ nrow(Targeted1)
+ write.csv(Targeted1,"High_Revenue_Target_Customers.csv",row.names=F) 
+ Targeted1
+
+
+
