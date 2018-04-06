@@ -39,7 +39,7 @@ variables<-names(tele)
 dqr<-as.data.frame(variables)
 dqr$DataType<-sapply(tele,class)
 dqr$No.OfRecords<-nrow(tele)
-#Counting No. of Unique Values for each variable ##->ERROR
+#Counting No. of Unique Values for each variable 
 for(i in 1:ncol(tele))
 {
     dqr$UniqueRecords[i] < - length(unique(tele[,i]))
@@ -50,7 +50,7 @@ dqr$AvailablePercentage<-round(colMeans(!is.na(tele)),4)
 #Total and Percentage of Missing Values for each Variable
 dqr$Missing<-colSums(is.na(tele)) 
 dqr$MissingPercentage<-round(colMeans(is.na(tele)),4) 
-#Minimum, Maximum, Mean, Quantile Values for each Variable ##error
+#Minimum, Maximum, Mean, Quantile Values for each Variable
 for (i in 1:ncol(tele))
 {
   dqr$Minimum[i]<-round(ifelse(class(tele[,i])=="integer"|class(tele[,i])=="numeric",min(tele[,i],na.rm=T),0),2)
